@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29721.120
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostfixCalculator.Domain", "PostffixCalculator.Domain\PostfixCalculator.Domain.csproj", "{3C733BBE-DEA7-49F4-A29D-0070DD07FA8C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostfixCalculator.Application", "PostfixCalculator.Application\PostfixCalculator.Application.csproj", "{F4BC09E1-21E5-4CE0-9373-BBC7C9EAEDD0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostfixCalculator.ConsoleUI", "PostfixCalculator.ConsoleUI\PostfixCalculator.ConsoleUI.csproj", "{8FED221C-FF74-4ED3-953B-2066FAF0E964}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostfixCalculator.BaseOperations", "PostfixCalculator.BaseOperations\PostfixCalculator.BaseOperations.csproj", "{7720DEB0-B8F8-4010-AA17-05E592B993E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostfixCalculator.Tests", "PostfixCalculator.Tests\PostfixCalculator.Tests.csproj", "{119A1051-526D-472C-A2B5-96E319609E43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostffixCalculator.WebUI", "PostffixCalculator.WebUI\PostffixCalculator.WebUI.csproj", "{3C73B3BD-8D3D-4246-A1AB-D70C38152F19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C733BBE-DEA7-49F4-A29D-0070DD07FA8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C733BBE-DEA7-49F4-A29D-0070DD07FA8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C733BBE-DEA7-49F4-A29D-0070DD07FA8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C733BBE-DEA7-49F4-A29D-0070DD07FA8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4BC09E1-21E5-4CE0-9373-BBC7C9EAEDD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4BC09E1-21E5-4CE0-9373-BBC7C9EAEDD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4BC09E1-21E5-4CE0-9373-BBC7C9EAEDD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4BC09E1-21E5-4CE0-9373-BBC7C9EAEDD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FED221C-FF74-4ED3-953B-2066FAF0E964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FED221C-FF74-4ED3-953B-2066FAF0E964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FED221C-FF74-4ED3-953B-2066FAF0E964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FED221C-FF74-4ED3-953B-2066FAF0E964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7720DEB0-B8F8-4010-AA17-05E592B993E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7720DEB0-B8F8-4010-AA17-05E592B993E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7720DEB0-B8F8-4010-AA17-05E592B993E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7720DEB0-B8F8-4010-AA17-05E592B993E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{119A1051-526D-472C-A2B5-96E319609E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{119A1051-526D-472C-A2B5-96E319609E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{119A1051-526D-472C-A2B5-96E319609E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{119A1051-526D-472C-A2B5-96E319609E43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C73B3BD-8D3D-4246-A1AB-D70C38152F19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C73B3BD-8D3D-4246-A1AB-D70C38152F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C73B3BD-8D3D-4246-A1AB-D70C38152F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C73B3BD-8D3D-4246-A1AB-D70C38152F19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {06B722DC-8E8B-4A91-8C9A-49BA39F5F4A6}
+	EndGlobalSection
+EndGlobal

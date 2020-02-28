@@ -1,0 +1,58 @@
+﻿@page "/postfixcalculator"
+@using PostffixCalculator.WebUI.Data;
+@using global::PostfixCalculator.Domain;
+@inject PosfixCalculatorService calculateService;
+
+
+@if (operations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Арность</th>
+                <th>Строковое представление</th>
+                <th>Приоритет выполнения</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var op in operations)
+            {
+                <tr>
+                    <td>@op.Arity</td>
+                    <td>@op.StringPresentation</td>
+                    <td>@op.Priority</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+
+    <input @bind="_expression" placeholder="2+2" />
+    <button @onclick="@Caculate">Расчитать</button>
+    <br /> <br /><br />
+    <h1>Результат: @_answer</h1>
+}
+
+@code {
+
+    private IReadOnlyCollection<IOperation> operations;
+    private string _expression;
+    private string _answer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        operations = await calculateService.GetOperationsAsync();
+    }
+
+
+    private async Task Caculate()
+    {
+        _answer = await calculateService.Calculate(_expression);
+    }
+}
