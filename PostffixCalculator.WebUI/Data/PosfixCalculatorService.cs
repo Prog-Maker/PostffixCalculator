@@ -1,12 +1,9 @@
-﻿using PostfixCalculator.Application;
-using PostfixCalculator.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PostffixCalculator.WebUI.Data
+﻿namespace PostffixCalculator.WebUI.Data
 {
+    using PostfixCalculator.Domain;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using global::PostfixCalculator.Application;
     public class PosfixCalculatorService
     {
@@ -24,18 +21,21 @@ namespace PostffixCalculator.WebUI.Data
 
         public Task<string> Calculate(string expression)
         {
-            try
+            return Task.Run(() =>
             {
-                return Task.Run(() => calculator.Calculate(expression).ToString());
-            }
-            catch (UnrecognizedOperationException e)
-            {
-                return Task.Run(() =>e.Message);
-            }
-            catch(Exception ex)
-            {
-                return Task.Run(() => ex.Message);
-            }
+                try
+                {
+                    return calculator.Calculate(expression).ToString();
+                }
+                catch (UnrecognizedOperationException e)
+                {
+                    return e.Message;
+                }
+                catch(Exception ex)
+                {
+                    return "Ошибка, возможно задано неправильное количество операндов в выражении!!!";
+                }
+            });
         }
 
         public Task<IReadOnlyCollection<IOperation>> GetOperationsAsync()

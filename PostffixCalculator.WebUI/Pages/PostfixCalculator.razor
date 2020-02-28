@@ -10,7 +10,8 @@
 }
 else
 {
-
+    <h3>Список доступных операций</h3>
+    <br />
     <table class="table">
         <thead>
             <tr>
@@ -33,7 +34,7 @@ else
 
     <br />
 
-    <input @bind="_expression" placeholder="2+2" />
+    <input @bind="_expression" placeholder=" Example: (2+2)*2" />
     <button @onclick="@Caculate">Расчитать</button>
     <br /> <br /><br />
     <h1>Результат: @_answer</h1>
@@ -48,11 +49,13 @@ else
     protected override async Task OnInitializedAsync()
     {
         operations = await calculateService.GetOperationsAsync();
+
     }
 
 
     private async Task Caculate()
     {
         _answer = await calculateService.Calculate(_expression);
+        _expression = "";
     }
 }

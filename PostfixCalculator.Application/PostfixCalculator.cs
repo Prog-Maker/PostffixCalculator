@@ -1,9 +1,8 @@
 ﻿namespace PostfixCalculator.Application
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Globalization;
     using global::PostfixCalculator.Domain;
+    using System.Collections.Generic;
+    using System.Globalization;
 
 
     /// <summary>
@@ -12,11 +11,14 @@
     public class PostfixCalculator : ICalculator
     {
         private readonly NumberFormatInfo numberFormatInfo;
+        NumberStyles styles;
         private readonly IRecognizer recognizer;
+
 
         public PostfixCalculator(IRecognizer recognizer)
         {
             numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
+            styles = NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint;
             this.recognizer = recognizer;
         }
 
@@ -68,18 +70,17 @@
             var currentOperation = recognizer.GetOperation(operand);
             var numberOfArguments = currentOperation.Arity;
             var arguments = new double[numberOfArguments];
-            try
+            //try
+            //{
+            for (var i = 0; i < numberOfArguments; i++)
             {
-                for (var i = 0; i < numberOfArguments; i++)
-                {
-                    arguments[i] = double.Parse(helperStack.Pop(),
-                                                          NumberStyles.AllowDecimalPoint, numberFormatInfo);
-                }
+                arguments[i] = double.Parse(helperStack.Pop(), styles, numberFormatInfo);
             }
-            catch
-            {
-                throw new UnrecognizedOperationException();
-            }
+            //}
+            //catch
+            //{
+            //    throw new UnrecognizedOperationException();
+            //}
             var result = currentOperation.Perform(arguments);
             helperStack.Push(result.ToString(numberFormatInfo));
             return result;
@@ -92,8 +93,8 @@
         /// <returns></returns>
         private bool IsNumber(string operand)
         {
-            var isNumber = double.TryParse(operand, 
-                                           NumberStyles.AllowDecimalPoint, numberFormatInfo, 
+            var isNumber = double.TryParse(operand,
+                                           NumberStyles.AllowDecimalPoint, numberFormatInfo,
                                            out double _);
             return isNumber;
         }
@@ -121,29 +122,11 @@
                 {
                     if (operand == "(")
                     {
-                        var tempOperands = new List<string>();
+                        FindInnerParentheses(operands, ref counter, resultQueue);
 
-                        foreach (var op in operands.Skip(++counter))
-                        {
-                            if (op == ")")
-                            {
-                                counter++;
-                                break; 
-                            }
-                            tempOperands.Add(op);
-                            counter++;
-                        }
-
-                        var tempResultQueue = ReorderInPostfixNotation(tempOperands);
-
-                        foreach (var op in tempResultQueue)
-                        {
-                            resultQueue.Enqueue(op);
-                        }
-                        
                         continue;
                     }
-                    
+
                     if (helperStack.Count > 0)
                     {
                         if (GetPriority(operand) <= GetPriority(helperStack.Peek()))
@@ -160,11 +143,44 @@
                 }
                 counter++;
             }
+
             foreach (var operand in helperStack)
             {
                 resultQueue.Enqueue(operand);
             }
             return resultQueue;
+        }
+
+        private void FindInnerParentheses(List<string> operands, ref int counter, Queue<string> resultQueue)
+        {
+            var tempOperands = new List<string>();
+
+            for (int i = counter; i < operands.Count; i = counter)
+            {
+                var op = operands[i];
+
+                // foreach (var op in operands.Skip(++counter))
+                if (op == "(")
+                {
+                    counter++;
+                    FindInnerParentheses(operands, ref counter, resultQueue);
+                    continue;
+                }
+                if (op == ")")
+                {
+                    counter++;
+                    break;
+                }
+                tempOperands.Add(op);
+                counter++;
+            }
+
+            var tempResultQueue = ReorderInPostfixNotation(tempOperands);
+
+            foreach (var op in tempResultQueue)
+            {
+                resultQueue.Enqueue(op);
+            }
         }
 
         private int GetPriority(string operation)

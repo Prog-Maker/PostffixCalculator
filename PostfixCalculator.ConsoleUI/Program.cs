@@ -5,6 +5,7 @@
     using PostfixCalculator.Domain;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     class Program
     {
@@ -30,7 +31,7 @@
             try
             {
                 operations = GetOperations();
-               // operations = pluginReader.ReadPluginsFrom(Environment.CurrentDirectory + "\\Plugins");
+                // operations = pluginReader.ReadPluginsFrom(Environment.CurrentDirectory + "\\Plugins");
             }
             catch (DirectoryNotFoundException)
             {

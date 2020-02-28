@@ -1,6 +1,7 @@
 ﻿namespace CalculatorSolution.Test.Logic
 {
     using System.Collections.Generic;
+    using BaseOperations;
     using Moq;
     using NUnit.Framework;
     using PostfixCalculator.Application;
@@ -9,6 +10,36 @@
     [TestFixture]
     public class RecognizerTests
     {
+        private List<IOperation> GetAllOperations()
+        {
+            return new List<IOperation>
+            {
+                new Divide(),
+                new Multiply(),
+                new Plus(),
+                new PlusPlus(),
+                new Sqrt(),
+                new Minus()
+            };
+        }
+
+
+
+        [Test]
+        [TestCase("((45 + 45))")]
+        [TestCase("((45 +45))")]
+        [TestCase("((45+ 45))")]
+        [TestCase("((45 + 45) )")]
+        [TestCase("( (45 + 45) )")]
+        public void RemoveWhiteSpaceCharsFromExpression(string expression)
+        {
+            var operands = new List<string>() { "(", "(", "45", "+", "45",")" , ")"};
+            IRecognizer recognizer = new BaseRecognizer(GetAllOperations());
+            var result = recognizer.Recognize(expression);
+            Assert.AreEqual(operands, result);
+        }
+
+
         [Test]
         public void GetFullNumber_ReturnsFullNumberFromExpression()
         {

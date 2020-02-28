@@ -62,13 +62,21 @@
 
         public List<string> Recognize(string expression)
         {
+            expression = expression.Replace(" ","");
+            
             var operands = new List<string>();
-            int nextCharacterPosition;
+
+            //var opSeparator = operations.Select(op => op.StringPresentation).ToArray();
+
+            //operands = expression.Split(opSeparator, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            int nextCharacterPosition = 0;
             for (var i = 0; i < expression.Length; i += nextCharacterPosition)
             {
-                var character = expression[i];
+                //var ch = expression[i];
+                //if (char.IsWhiteSpace(expression[i])) continue;
 
-                var recognizedOperand = GetRecognizedOperand(character, expression, i);
+                var recognizedOperand = GetRecognizedOperand(expression[i], expression, i);
 
                 operands.Add(recognizedOperand);
                 nextCharacterPosition = recognizedOperand.Length;
